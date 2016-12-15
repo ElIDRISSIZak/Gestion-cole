@@ -1,0 +1,72 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+	.my-group .form-control{
+	    width:50%;
+	}
+</style>
+	<div ng-controller="DeclarationController as ctrl" >
+			<div class="row"><!-- forms div -->	
+				<div>
+				<h1>add Declaration form :</h1>
+				<form name="addUserForm">
+				<div class="form-group">
+				 	<label>type declaration :</label>
+				 	<input type="text" name="email" ng-model="ctrl.declaration.typeDeclaration" class="form-control" type="text"  required>
+				 </div>
+				<div class="form-group">
+					<label  >Objet:</label> 
+					<input type="text" name="firstName" ng-model="ctrl.declaration.objet" class="form-control" required>
+				</div>
+				
+				 <div class="form-group">
+					<label>Declaration :</label>
+					<textarea name="lastName"  ng-model="ctrl.declaration.contenu" class="form-control"  rows="10" required>
+					Saisir votre message</textarea>
+				</div>
+				 
+				</form>
+				
+				<div class="form-group">
+						<button ng-click="ctrl.addDeclaration()" class="btn btn-info"
+						ng-disabled="addUserForm.firstName.$invalid||
+						addUserForm.lastName.$invalid||addUserForm.email.$error.email
+						">Envoyer votre declaration</button>
+						<button class="btn btn-danger">Cancel</button>
+					</div>
+					
+				</div>
+			</div>
+			<div> <!-- begin of the panel-->
+			<h1>List de mes declarations </h1>
+				      	<table class="table"><!-- the table of users  -->
+						<thead>
+							<tr>
+								<th>id</th>
+								<th>objet</th>
+								<th>Contenu</th>
+								<th>type</th>
+								<th>detail</th>
+								<th>delete</th>	
+							</tr>
+						</thead>	
+						<tbody>
+							<tr ng-repeat="u in ctrl.declarationsenv">
+								<td>{{u.idDeclaration}}</td>
+								<td>{{u.objet}}</td>
+								<td>{{u.contenu}}</td>
+								<td>{{u.typeDeclaration}}</td>
+								<td><button class="btn btn-info" ng-click="ctrl.getDeclarationDetail(u.idDeclaration)" >detail</button>
+								<td>	<button ng-click="ctrl.deleteDeclaration(u.idDeclaration)" class="btn btn-danger">delete</button>
+									
+								</td>
+							</tr>
+						</tbody>
+					</table><!-- end of the table of users  -->
+					
+			      </div>
+			    </div>
+				  <!-- end of the panel-->
+			
+		<!-- the end of the controller div  -->
+	
+	

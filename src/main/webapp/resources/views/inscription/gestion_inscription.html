@@ -1,0 +1,35 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<div  ng-controller="gestionController">
+		<div> <!-- begin of the panel-->
+			<h1>List des nouvelles inscriptions</h1>
+				      	<table class="table"><!-- the table of users  -->
+						<thead>
+							<tr>
+								<th>id</th>
+								<th>Nom et Prenom</th>
+								<th>email</th>
+								<th>cin</th>
+								<th>Etat Compte</th>
+								<th>Valider</th>
+								<th>Rejeter</th>
+								<th>Supprimer</th>
+									
+							</tr>
+						</thead>	
+						<tbody>
+							<tr ng-repeat="user in users">
+								<td>{{user.id}}</td>
+								<td>{{user.firstName}} {{user.lastName}}</td>
+								<td>{{user.email}}</td>
+								<td>{{user.cin}}</td>
+								<td ng-class="bool(user.etatCompte)">{{user.etatCompte == true ? 'Valide' : 'Invalide' }}</td>
+								<td><button ng-class="changeCss(user.etatCompte)" ng-click="valider(user.id)" >{{user.etatCompte == true ? 'Desactiver' : 'Activer' }}</button>
+								<td>	<button ng-click="rejeter(user.id)" class="btn-info">Rejeter</button>
+								<td><button class="btn-danger" ng-click="supprimer(user.id)" >Suprrimer</button></td>
+							</tr>
+						</tbody>
+					</table><!-- end of the table of users  -->
+					
+		</div>
+</div>
+		    

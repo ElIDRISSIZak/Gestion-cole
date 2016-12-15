@@ -1,0 +1,46 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+	.my-group .form-control{
+	    width:50%;
+	}
+</style>
+	<div ng-controller="MessageEnvController as ctrl" >
+	
+			<div ng-if="ctrl.messagesenv"> <!-- begin of the panel-->
+			<h1>List des messages envoyees</h1>
+				      	<table class="table"><!-- the table of users  -->
+						<thead>
+							<tr>
+						
+								<th>objet</th>
+								<th>message</th>
+								<th>email</th>
+								<th>detail</th>
+								<th>delete</th>		
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="u in ctrl.messagesenv">
+								<td>{{u.objet}}</td>
+								<td>{{u.message}}</td>
+								<td>{{u.email}}</td>
+								<td>
+									<button class="btn btn-info" ng-click="ctrl.getMessageDetail(u.id)" >detail</button>
+							
+									
+									<td><button ng-click="ctrl.deleteMessage(u.id)" class="btn btn-danger">delete</button>
+									
+								</td>
+							</tr>
+						</tbody>
+					</table><!-- end of the table of users  -->
+					
+			      </div>
+			    </div>
+				
+			</div>  <!-- end of the panel-->
+			
+		<!-- the end of the controller div  -->
+	</div>
+	
+</div>

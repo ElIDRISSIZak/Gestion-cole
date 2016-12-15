@@ -1,0 +1,52 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<div ng-controller="RightsController as ctrl">
+
+			<!-- wast -->
+			<fieldset>
+				<table class="table">
+					<tr>
+						<th>right name :</th>
+						<th>right disc :</th>
+						<th></th>
+					</tr>
+					
+						<tr ng-repeat="right in ctrl.rights" >
+							<td>{{right.name}}</td>
+							<td>{{right.disc}}</td>
+							<td>
+							<button class="btn btn-info" ng-click="ctrl.deleteRight(right.id)">desactivate</button>
+							</td>
+						</tr>
+					
+				</table>
+
+				<div class="row">
+					<div class="col-lg-4"></div>
+					<div class="col-lg-8">
+							<select ng-model="ctrl.category"  class="form-control">
+									<option ng-repeat="(key, data) in ctrl.categories">{{key}}</option>					
+							</select>
+					</div>
+				</div>
+					<div class="row">
+						<div class="col-lg-4">right Name</div>
+						<div class="col-lg-8">
+							<select  ng-model="ctrl.name" class="form-control">
+								<option ng-repeat="(key,data) in  ctrl.categories[ctrl.category]" > {{key}} </option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">disc</div>
+						<div class="col-lg-8">
+							<input type="text" ng-model="ctrl.disc" class="form-control">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4"></div>
+						<div class="col-lg-8">
+							<button class="btn btn-default col-lg-6" ng-click="ctrl.add()"> activate  </button>
+						</div>
+					</div>
+			</fieldset>
+		</div>

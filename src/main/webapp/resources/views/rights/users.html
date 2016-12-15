@@ -1,0 +1,139 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+	.my-group .form-control{
+	    width:50%;
+	}
+</style>
+	<div ng-controller="UsersController as ctrl" class="container" >
+			<div class="row">
+			<div class="col-xs-8"><!-- forms div -->	
+				
+				<h1>add user form :</h1>
+				<form name="addUserForm">
+				<div class="form-group">
+					<label  >first name :</label> 
+					<input type="text" name="firstName" ng-model="ctrl.user.firstName" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label>last name :</label>
+					<input type="text" name="lastName"  ng-model="ctrl.user.lastName" class="form-control" required>
+				</div>
+				 <div class="form-group">
+				 	<label>email :</label>
+				 	<input type="text" name="email" ng-model="ctrl.user.email" class="form-control" type="email"  required>
+				 </div>
+				 <div class="form-group">
+				 	<label>password :</label>
+				 	<input type="text" name="password"  ng-model="ctrl.user.password" class="form-control" required>
+				 </div>
+				 <!-- <div class="form-group">
+				 	<label>password2 :</label>
+				 	<input type="password" name="password2"  class="form-control" required>
+				 </div> -->
+				 <div class="form-group">
+				 	<label>telephone :</label>
+				 	<input type="text" name="" ng-model="ctrl.user.telephone" class="form-control" required>
+				 </div>
+				</form>
+				
+				<div ng-show="ctrl.viewMode=='add'" >
+				
+					<div class="form-group">
+						<label>group :</label>
+						<select ng-model="ctrl.idGroup" class="form-control">
+							<option value="0">----</option>
+							<option ng-repeat="group in ctrl.groups" value="{{group.id}}">{{group.groupName}} </option>
+						</select>
+					</div>
+					<div class="form-group">
+						<button ng-click="ctrl.addUser()" class="btn btn-info"
+						ng-disabled="addUserForm.firstName.$invalid||addUserForm.password2.$invalie||
+						addUserForm.lastName.$invalid||addUserForm.email.$error.email||addUserForm.password.$invalid
+						">Add the User</button>
+						<button class="btn btn-danger">Cancel</button>
+					</div>
+				</div><!--end of add button  -->
+				
+				<div ng-show="ctrl.viewMode=='update'">
+					<div class="panel panel-default">
+				      <div class="panel-heading">groups :</div>
+				      <div class="panel-body">
+				      	<h2>the user is already in groups :</h2>
+						<ul class="list-group">
+							<li ng-repeat="group in ctrl.userGroups" class="list-group-item">{{group.groupName}}
+							<span id="searchclear" class="glyphicon glyphicon-remove-circle"  style="cursor: pointer;"  ng-click="ctrl.removeUserFromGroup(group.id)">
+							</span>
+							</li>
+						</ul>
+						<h3> if you want to add more group to user type themes bellow :</h3>
+						<form name="addgrouptouser">
+							<div class="form-group">
+								<div class="input-group">
+									<select ng-model="ctrl.idGroup" name="selection"class="form-control" required>
+										<option ng-repeat="group in ctrl.groups" value="{{group.id}}">{{group.groupName}} </option>
+									</select>
+									<span class="input-group-btn">
+									<button ng-click="ctrl.addUserToGroup()" class="btn btn-default" 
+										ng-disabled="addgrouptouser.selection.$invalid">add to group</button>
+									</span>
+								</div>
+							</div>
+						</form>
+						<div class="form-group">
+							<button ng-click="ctrl.updateAction()" class="btn btn-info">Update</button>
+							<button ng-click="ctrl.addMode()" class="btn btn-danger">return to add mode</button>
+						</div>
+				      </div>
+				    </div>
+				</div><!-- end update form  -->
+				</div>
+			</div>
+			
+			<div class="row"> <!-- begin of the panel-->
+				<div class="panel panel-primary col-xs-8">
+			      <div class="panel-heading">list of users :</div>
+			      <div class="panel-body">
+			      		<div class="form-group"> <!-- search div -->
+							<label>search for user :</label>
+							<div class="input-group my-group">
+								<input type="text" ng-model="ctrl.nameForSearch" ng-change="ctrl.search()" class="form-control">
+								<select ng-model="ctrl.idGroupForSearch" ng-change="ctrl.updateByCategory()" class="selectpicker form-control">
+									<option value="0">----</option>
+									<option ng-repeat="group in ctrl.groups" value="{{group.id}}">{{group.groupName}} </option>
+								</select>
+								<span class="input-group-btn">
+								<button class="btn btn-default" type="submit">Refrech</button>
+								</span>
+							</div>
+						</div> <!-- end of search div -->
+				      	<table class="table"><!-- the table of users  -->
+						<thead>
+							<tr>
+								<th>id</th>
+								<th>first name</th>
+								<th>last name</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="u in ctrl.users">
+								<td>{{u.id}}</td>
+								<td>{{u.firstName}}</td>
+								<td>{{u.lastName}}</td>
+								<td>
+									<button ng-click="ctrl.updateMode(u.id)" class="btn btn-info">update</button>
+									<button ng-click="ctrl.deleteUser(u.id)" class="btn btn-danger">delete</button>
+									<button class="btn btn-info" ng-click="ctrl.getUserDetail(u.id)" >detail</button>
+								</td>
+							</tr>
+						</tbody>
+					</table><!-- end of the table of users  -->
+					
+			      </div>
+			    </div>
+				
+			</div>  <!-- end of the panel-->
+			
+		<!-- the end of the controller div  -->
+	</div>
+	
+</div>
